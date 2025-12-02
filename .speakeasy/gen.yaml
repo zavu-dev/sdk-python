@@ -26,8 +26,9 @@ generation:
     generateTests: false
     generateNewTests: true
     skipResponseBodyAssertions: false
+  sdkName: Zavu Python SDK
 python:
-  version: 0.0.8
+  version: 0.0.11
   additionalDependencies:
     dev: {}
     main: {}
@@ -68,6 +69,7 @@ python:
   outputModelSuffix: output
   packageManager: poetry
   packageName: zavu-sdk
+  published: true
   pytestFilterWarnings: []
   pytestTimeout: 0
   responseFormat: flat
