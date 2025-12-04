@@ -33,10 +33,13 @@ class Message(BaseModel):
     """Content for non-text message types (WhatsApp only)."""
 
     cost: Optional[float] = None
-    """Cost of the message in USD."""
+    """MAU cost in USD (charged for first contact of the month)."""
 
-    cost_provider: Optional[str] = FieldInfo(alias="costProvider", default=None)
-    """Provider that charged for the message (e.g., 'telnyx')."""
+    cost_provider: Optional[float] = FieldInfo(alias="costProvider", default=None)
+    """Provider cost in USD (Telnyx, SES, etc.)."""
+
+    cost_total: Optional[float] = FieldInfo(alias="costTotal", default=None)
+    """Total cost in USD (MAU + provider cost)."""
 
     error_code: Optional[str] = FieldInfo(alias="errorCode", default=None)
 
