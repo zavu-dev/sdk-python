@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.5.0 (2025-12-04)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/zavudev/sdk-python/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* **api:** update api docs ([cfcb99d](https://github.com/zavudev/sdk-python/commit/cfcb99d2bacb8f7a3362cf6fc859c270e60321b2))
+
+
+### Chores
+
+* update SDK settings ([d4d7d58](https://github.com/zavudev/sdk-python/commit/d4d7d58b5f6a5fa85061444fb89b8b9e0c25c0be))
+
 ## 0.4.0 (2025-12-04)
 
 Full Changelog: [v0.0.1...v0.4.0](https://github.com/zavudev/sdk-python/compare/v0.0.1...v0.4.0)

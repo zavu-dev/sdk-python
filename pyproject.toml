@@ -1,11 +1,11 @@
 [project]
 name = "zavudev"
-version = "0.4.0"
+version = "0.5.0"
 description = "The official Python library for the zavudev API"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
-{ name = "Zavudev", email = "" },
+{ name = "Zavudev", email = "hi@zavu.dev" },
 ]
 
 dependencies = [
