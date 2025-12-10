@@ -1,33 +1,14 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Optional
 from datetime import datetime
-from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
+from .sender_webhook import SenderWebhook
 
-__all__ = ["Sender", "Webhook"]
-
-
-class Webhook(BaseModel):
-    """Webhook configuration for the sender."""
-
-    active: bool
-    """Whether the webhook is active."""
-
-    events: List[Literal["message.sent", "message.delivered", "message.failed", "message.inbound", "conversation.new"]]
-    """List of events the webhook is subscribed to."""
-
-    url: str
-    """HTTPS URL that will receive webhook events."""
-
-    secret: Optional[str] = None
-    """Webhook secret for signature verification.
-
-    Only returned on create or regenerate.
-    """
+__all__ = ["Sender"]
 
 
 class Sender(BaseModel):
@@ -45,5 +26,5 @@ class Sender(BaseModel):
 
     updated_at: Optional[datetime] = FieldInfo(alias="updatedAt", default=None)
 
-    webhook: Optional[Webhook] = None
+    webhook: Optional[SenderWebhook] = None
     """Webhook configuration for the sender."""

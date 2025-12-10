@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from typing import List, Optional
-from typing_extensions import Literal
 
 import httpx
 
@@ -21,6 +20,8 @@ from .._response import (
 from ..pagination import SyncCursor, AsyncCursor
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.sender import Sender
+from ..types.webhook_event import WebhookEvent
+from ..types.webhook_secret_response import WebhookSecretResponse
 
 __all__ = ["SendersResource", "AsyncSendersResource"]
 
@@ -51,10 +52,7 @@ class SendersResource(SyncAPIResource):
         name: str,
         phone_number: str,
         set_as_default: bool | Omit = omit,
-        webhook_events: List[
-            Literal["message.sent", "message.delivered", "message.failed", "message.inbound", "conversation.new"]
-        ]
-        | Omit = omit,
+        webhook_events: List[WebhookEvent] | Omit = omit,
         webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -137,10 +135,7 @@ class SendersResource(SyncAPIResource):
         name: str | Omit = omit,
         set_as_default: bool | Omit = omit,
         webhook_active: bool | Omit = omit,
-        webhook_events: List[
-            Literal["message.sent", "message.delivered", "message.failed", "message.inbound", "conversation.new"]
-        ]
-        | Omit = omit,
+        webhook_events: List[WebhookEvent] | Omit = omit,
         webhook_url: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -264,6 +259,41 @@ class SendersResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
+    def regenerate_webhook_secret(
+        self,
+        sender_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> WebhookSecretResponse:
+        """Regenerate the webhook secret for a sender.
+
+        The old secret will be invalidated
+        immediately.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not sender_id:
+            raise ValueError(f"Expected a non-empty value for `sender_id` but received {sender_id!r}")
+        return self._post(
+            f"/v1/senders/{sender_id}/webhook/secret",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=WebhookSecretResponse,
+        )
+
 
 class AsyncSendersResource(AsyncAPIResource):
     @cached_property
@@ -291,10 +321,7 @@ class AsyncSendersResource(AsyncAPIResource):
         name: str,
         phone_number: str,
         set_as_default: bool | Omit = omit,
-        webhook_events: List[
-            Literal["message.sent", "message.delivered", "message.failed", "message.inbound", "conversation.new"]
-        ]
-        | Omit = omit,
+        webhook_events: List[WebhookEvent] | Omit = omit,
         webhook_url: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -377,10 +404,7 @@ class AsyncSendersResource(AsyncAPIResource):
         name: str | Omit = omit,
         set_as_default: bool | Omit = omit,
         webhook_active: bool | Omit = omit,
-        webhook_events: List[
-            Literal["message.sent", "message.delivered", "message.failed", "message.inbound", "conversation.new"]
-        ]
-        | Omit = omit,
+        webhook_events: List[WebhookEvent] | Omit = omit,
         webhook_url: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -504,6 +528,41 @@ class AsyncSendersResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    async def regenerate_webhook_secret(
+        self,
+        sender_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> WebhookSecretResponse:
+        """Regenerate the webhook secret for a sender.
+
+        The old secret will be invalidated
+        immediately.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not sender_id:
+            raise ValueError(f"Expected a non-empty value for `sender_id` but received {sender_id!r}")
+        return await self._post(
+            f"/v1/senders/{sender_id}/webhook/secret",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=WebhookSecretResponse,
+        )
+
 
 class SendersResourceWithRawResponse:
     def __init__(self, senders: SendersResource) -> None:
@@ -523,6 +582,9 @@ class SendersResourceWithRawResponse:
         )
         self.delete = to_raw_response_wrapper(
             senders.delete,
+        )
+        self.regenerate_webhook_secret = to_raw_response_wrapper(
+            senders.regenerate_webhook_secret,
         )
 
 
@@ -545,6 +607,9 @@ class AsyncSendersResourceWithRawResponse:
         self.delete = async_to_raw_response_wrapper(
             senders.delete,
         )
+        self.regenerate_webhook_secret = async_to_raw_response_wrapper(
+            senders.regenerate_webhook_secret,
+        )
 
 
 class SendersResourceWithStreamingResponse:
@@ -566,6 +631,9 @@ class SendersResourceWithStreamingResponse:
         self.delete = to_streamed_response_wrapper(
             senders.delete,
         )
+        self.regenerate_webhook_secret = to_streamed_response_wrapper(
+            senders.regenerate_webhook_secret,
+        )
 
 
 class AsyncSendersResourceWithStreamingResponse:
@@ -586,4 +654,7 @@ class AsyncSendersResourceWithStreamingResponse:
         )
         self.delete = async_to_streamed_response_wrapper(
             senders.delete,
+        )
+        self.regenerate_webhook_secret = async_to_streamed_response_wrapper(
+            senders.regenerate_webhook_secret,
         )
