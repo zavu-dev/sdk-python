@@ -5,5 +5,11 @@ from typing_extensions import Literal, TypeAlias
 __all__ = ["WebhookEvent"]
 
 WebhookEvent: TypeAlias = Literal[
-    "message.sent", "message.delivered", "message.failed", "message.inbound", "conversation.new"
+    "message.queued",
+    "message.sent",
+    "message.delivered",
+    "message.failed",
+    "message.inbound",
+    "conversation.new",
+    "template.status_changed",
 ]
