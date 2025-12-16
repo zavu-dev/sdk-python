@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.12.0 (2025-12-16)
+
+Full Changelog: [v0.11.0...v0.12.0](https://github.com/zavudev/sdk-python/compare/v0.11.0...v0.12.0)
+
+### Features
+
+* **api:** add submit template ([32c5e78](https://github.com/zavudev/sdk-python/commit/32c5e78d0a44385429346db509d4ea5e345afb76))
+* **api:** api update ([f00a45c](https://github.com/zavudev/sdk-python/commit/f00a45c4fced1fa32e133ed21b55e23bde611522))
+* **api:** api update ([d33336f](https://github.com/zavudev/sdk-python/commit/d33336f7de3862a588decdd3d7ef15c9fadd90d2))
+
+
+### Chores
+
+* **internal:** add missing files argument to base client ([08b5b97](https://github.com/zavudev/sdk-python/commit/08b5b97210d16560efde81ba335e09a0c3daebf9))
+
 ## 0.11.0 (2025-12-16)
 
 Full Changelog: [v0.10.1...v0.11.0](https://github.com/zavudev/sdk-python/compare/v0.10.1...v0.11.0)
