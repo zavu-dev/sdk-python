@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.13.1 (2025-12-18)
+
+Full Changelog: [v0.13.0...v0.13.1](https://github.com/zavudev/sdk-python/compare/v0.13.0...v0.13.1)
+
+### Bug Fixes
+
+* use async_to_httpx_files in patch method ([fd7fa37](https://github.com/zavudev/sdk-python/commit/fd7fa377fd75e062bfce0bd2cfc39b2ae044c9e1))
+
+
+### Chores
+
+* speedup initial import ([1974163](https://github.com/zavudev/sdk-python/commit/1974163ab7d6f1fef84437d535052acf468d9aed))
+
+
+### Refactors
+
+* **internal:** switch from rye to uv ([f862b5a](https://github.com/zavudev/sdk-python/commit/f862b5a3ccad3ad9a662646cd09de543f282fa85))
+
 ## 0.13.0 (2025-12-17)
 
 Full Changelog: [v0.12.0...v0.13.0](https://github.com/zavudev/sdk-python/compare/v0.12.0...v0.13.0)
